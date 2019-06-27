@@ -94,6 +94,25 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.4.9</version>
+                <configuration>
+                    <targetClasses>
+                        <param>io.falcon.assignment.api.NoteAPI</param>
+                        <param>io.falcon.assignment.api.ValidRestControllerAdvice</param>
+                        <param>io.falcon.assignment.database.NoteRepositoryImpl</param>
+                        <param>io.falcon.assignment.palindrome.PalindromeFinderImpl</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>io.falcon.assignment.api.*</param>
+                        <param>io.falcon.assignment.database.*</param>
+                        <param>io.falcon.assignment.palindrome.*</param>
+                    </targetTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
