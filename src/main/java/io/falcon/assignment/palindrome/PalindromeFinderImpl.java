@@ -18,6 +18,18 @@ public class PalindromeFinderImpl implements PalindromeFinder {
     return highestPalindromeSize;
   }
 
+  private String trimToAlphabetical(String content) {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    for (int i = 0; i < content.length(); i++) {
+      char currentChar = content.charAt(i);
+      if(Character.isAlphabetic(currentChar)) {
+        stringBuilder.append(currentChar);
+      }
+    }
+    return stringBuilder.toString().toLowerCase();
+  }
+
   private int tryWithAllSubstringsFrom(String content, int startIndex) {
     int highestPalindromeSize = 0;
     for (int i = startIndex; i < content.length(); i++) {
@@ -40,18 +52,4 @@ public class PalindromeFinderImpl implements PalindromeFinder {
     }
     return true;
   }
-
-  private String trimToAlphabetical(String content) {
-    StringBuilder stringBuilder = new StringBuilder();
-
-    for (int i = 0; i < content.length(); i++) {
-      char currentChar = content.charAt(i);
-      if(Character.isAlphabetic(currentChar)) {
-        stringBuilder.append(currentChar);
-      }
-    }
-    return stringBuilder.toString().toLowerCase();
-  }
-
-
 }
