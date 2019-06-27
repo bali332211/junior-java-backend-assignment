@@ -1,0 +1,285 @@
+/* -------------------------- nav ------------------------ */
+body {
+    margin-top: 40px;
+    margin-left: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body:before {
+    content: "";
+    position: fixed;
+    left: -5%;
+    right: -5%;
+    z-index: -1;
+
+display: block;
+background-image: url(background.jpg);
+background-size: cover;
+width: 110%;
+height: 110%;
+
+-webkit-filter: blur(10px);
+-ms-filter: blur(10px);
+filter: blur(10px);
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: ghostwhite;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: ghostwhite;
+}
+
+.topnav .icon {
+    display: none;
+}
+
+
+/* -------------------------- form ------------------------ */
+
+* {
+    box-sizing: border-box;
+}
+
+input[type=number] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+#label-text {
+    text-align: center;
+}
+
+label {
+    padding: 12px 12px 12px 12px;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 5px;
+    color: ghostwhite;
+    font-size: 30px;
+}
+
+button[type=submit] {
+    background-color: mediumblue;
+    color: ghostwhite;
+    font-weight: bold;
+    margin-top: 25px;
+    padding: 12px 20px;
+    border-style: outset;
+    border-color: blue;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+button[type=submit]:hover {
+    background-color: darkblue;
+    border-color: mediumblue;
+}
+
+.hidden {
+    display: none;
+}
+
+#delete {
+    background-color: ghostwhite;
+    border-color: aliceblue;
+    color: #333333;
+}
+
+#delete:hover {
+    background-color: red;
+    border-color: #ff2415;
+    color: ghostwhite;
+}
+
+#connecting {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.col-label {
+    float: left;
+    width: 15%;
+    margin-top: 0.1px;
+}
+
+.col-button-before {
+    float: left;
+    width: 7%;
+    margin-top: 0.1px;
+}
+
+.col-input {
+    float: left;
+    width: 35%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1 {
+    font-weight: bold;
+    color: ghostwhite;
+    font-size: 60px;
+}
+
+h2 {
+    font-weight: bold;
+    color: ghostwhite;
+    font-size: 50px;
+}
+
+.pagetop-including-ordername {
+    word-break: break-all;
+}
+
+/* -------------------------- table ------------------------ */
+
+body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+}
+
+.nav-arrow {
+    color: ghostwhite;
+}
+
+.nav-arrow:active {
+    color: goldenrod;
+}
+
+.text-muted {
+    color: lightslategrey;
+}
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    font-size: 2vw;
+}
+
+table caption {
+    color: ghostwhite;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+table thead {
+    height: 3em;
+}
+
+table tr {
+    color: black;
+    background-color: ghostwhite;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+table th,
+table td {
+    text-align: center;
+    width: 100% ;
+    height: auto;
+}
+
+table th {
+    font-size: 2.5vw;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+td[data-label] {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+td[data-label]:hover{
+    overflow: visible;
+    white-space: normal;
+    word-break: break-all
+}
+
+.page {
+    color: ghostwhite;
+}
+
+/* -------------------------- alert ------------------------ */
+
+.alert-done {
+    padding: 20px;
+    background-color: green;
+    color: white;
+    width: 50%;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.alert-error {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    width: 50%;
+}
+

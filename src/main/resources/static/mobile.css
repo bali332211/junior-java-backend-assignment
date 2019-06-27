@@ -1,0 +1,116 @@
+.topnav a:not(:first-child) {
+    display: none;
+}
+
+.topnav a.icon {
+    float: right;
+    display: block;
+}
+
+.topnav.responsive {
+    position: relative;
+}
+
+.topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+}
+
+button[type=submit] {
+    width: 100%;
+    margin-top: 0;
+}
+
+td form button[type=submit] {
+    width: auto;
+    margin-top: 0;
+}
+
+#number {
+    width: 100%;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+}
+
+.col-label, .col-input {
+    width: 100%;
+    margin-top: 0;
+}
+
+label {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+/* -------------------------- table ------------------------ */
+
+table {
+    border: 0;
+    font-size: 5vw;
+}
+
+table caption {
+    font-size: 1.3em;
+}
+
+table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+}
+
+table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+}
+
+table th {
+    font-size: 8vw;
+}
+
+table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+table td:last-child {
+    border-bottom: 0;
+}
+
+.alert-done {
+    width: 100%;
+}
+
+.alert-error {
+    width: 100%;
+}
