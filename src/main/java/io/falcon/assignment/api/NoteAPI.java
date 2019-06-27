@@ -38,7 +38,6 @@ public class NoteAPI {
   @GetMapping("/api/all-notes")
   public ResponseEntity<List<NoteDtoDisplay>> allNotes() {
     List<Note> allNotes = noteRepository.getAll();
-
     if (allNotes == null) {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -46,7 +45,6 @@ public class NoteAPI {
     List<NoteDtoDisplay> noteDtoDisplays = allNotes.stream()
         .map(NoteAPI::getDtosFromEntities)
         .collect(Collectors.toList());
-
     return new ResponseEntity<>(noteDtoDisplays, HttpStatus.OK);
   }
 
@@ -54,8 +52,8 @@ public class NoteAPI {
     NoteDtoDisplay noteDtoDisplay = new NoteDtoDisplay();
 
     noteDtoDisplay.setContent(note.getContent());
-    ZonedDateTime zonedDateTime = note.getTimestamp().atZone(ZoneId.systemDefault());
-    noteDtoDisplay.setTimestamp(DATE_TIME_FORMATTER.format(zonedDateTime));
+    ZonedDateTime noteDate = note.getTimestamp().atZone(ZoneId.systemDefault());
+    noteDtoDisplay.setTimestamp(DATE_TIME_FORMATTER.format(noteDate));
     noteDtoDisplay.setLongest_palindrome_size(note.getLongestPalindromeSize());
     return noteDtoDisplay;
   }
@@ -65,7 +63,6 @@ public class NoteAPI {
     if (!isTimestampAllowed(noteDtoPayload.getTimestamp())) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-
     Note note = getNoteFromDto(noteDtoPayload);
     noteRepository.save(note);
 

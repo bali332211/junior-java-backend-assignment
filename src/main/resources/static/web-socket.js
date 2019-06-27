@@ -17,7 +17,7 @@ function connect() {
         console.log('Connected: ' + frame);
 
         stompClient.subscribe('/table/note', function (newNote) {
-            var jsonBody = JSON.parse(newNote.body)
+            var jsonBody = JSON.parse(newNote.body);
             displayNewNote(jsonBody.content, jsonBody.timestamp, jsonBody.longest_palindrome_size);
         });
 
