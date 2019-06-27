@@ -176,5 +176,4 @@ public class NoteAPITest {
         .andExpect(jsonPath("$.message[1]", containsString("Empty property:")))
         .andExpect(status().isBadRequest());
   }
-
 }
