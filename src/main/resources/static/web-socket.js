@@ -18,7 +18,7 @@ function connect() {
 
         stompClient.subscribe('/table/note', function (newNote) {
             var jsonBody = JSON.parse(newNote.body)
-            displayNewNote(jsonBody.content, jsonBody.timestamp, jsonBody.longestPalindromeSize);
+            displayNewNote(jsonBody.content, jsonBody.timestamp, jsonBody.longest_palindrome_size);
         });
 
         $("#connect").addClass('hidden');
