@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class NoteRowMapper implements RowMapper<Note> {
+
   @Override
   public Note mapRow(ResultSet rs, int i) throws SQLException {
     Note note = new Note();

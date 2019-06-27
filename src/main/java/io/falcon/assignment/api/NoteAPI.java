@@ -8,11 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 public class NoteAPI {
+
+  private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssZ");
 
   private NoteRepository noteRepository;
 
@@ -34,6 +39,16 @@ public class NoteAPI {
         .collect(Collectors.toList());
 
     return new ResponseEntity<>(noteDtoDisplays, HttpStatus.OK);
+  }
+
+  private static NoteDtoDisplay getDtosFromEntities(Note note) {
+    NoteDtoDisplay noteDtoDisplay = new NoteDtoDisplay();
+
+    noteDtoDisplay.setContent(note.getContent());
+    ZonedDateTime zonedDateTime = note.getTimestamp().atZone(ZoneId.systemDefault());
+    noteDtoDisplay.setTimestamp(DATE_TIME_FORMATTER.format(zonedDateTime));
+    noteDtoDisplay.setLongest_palindrome_size(note.getLongestPalindromeSize());
+    return noteDtoDisplay;
   }
 
 }
