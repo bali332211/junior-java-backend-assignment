@@ -6,6 +6,7 @@ import io.falcon.assignment.palindrome.PalindromeFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,11 +26,13 @@ public class NoteAPI {
 
   private NoteRepository noteRepository;
   private PalindromeFinder palindromeFinder;
+  private SimpMessagingTemplate template;
 
   @Autowired
-  public NoteAPI(NoteRepository noteRepository, PalindromeFinder palindromeFinder) {
+  public NoteAPI(NoteRepository noteRepository, PalindromeFinder palindromeFinder, SimpMessagingTemplate template) {
     this.noteRepository = noteRepository;
     this.palindromeFinder = palindromeFinder;
+    this.template = template;
   }
 
   @GetMapping("/api/all-notes")
@@ -63,6 +66,8 @@ public class NoteAPI {
     Note note = getNoteFromDto(noteDtoPayload);
     noteRepository.save(note);
 
+    NoteDtoJS noteDtoJS = getDtoJSFromNote(note);
+    template.convertAndSend("/table/note", noteDtoJS);
     return new ResponseEntity<>(noteDtoPayload, HttpStatus.OK);
   }
 
@@ -74,4 +79,11 @@ public class NoteAPI {
     return note;
   }
 
+  private NoteDtoJS getDtoJSFromNote(Note note) {
+    NoteDtoJS noteDtoJS = new NoteDtoJS();
+    noteDtoJS.setContent(note.getContent());
+    noteDtoJS.setTimestamp(note.getTimestamp().toEpochMilli());
+    noteDtoJS.setLongest_palindrome_size(note.getLongestPalindromeSize());
+    return noteDtoJS;
+  }
 }
