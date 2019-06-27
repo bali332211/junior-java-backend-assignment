@@ -1,5 +1,6 @@
 package io.falcon.assignment.api;
 
+import io.falcon.assignment.TestService;
 import io.falcon.assignment.database.Note;
 import io.falcon.assignment.database.NoteRepository;
 import io.falcon.assignment.palindrome.PalindromeFinder;
@@ -7,6 +8,7 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,9 +24,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -93,6 +99,82 @@ public class NoteAPITest {
         .contentType(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isInternalServerError());
+  }
+
+  @Test
+  public void saveNoteOk() throws Exception {
+    when(palindromeFinder.getHighestPalindromeSize(notNull())).thenReturn(6);
+
+    mockMvc.perform(post("/api/save-note")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(TestService.convertToJson(noteDtoPayload))
+    )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.content", is(payloadContent)))
+        .andExpect(jsonPath("$.timestamp", is(payloadTimestamp)));
+
+    ArgumentCaptor<Note> noteArgument = ArgumentCaptor.forClass(Note.class);
+    verify(noteRepository, times(1))
+        .save(noteArgument.capture());
+
+    Note noteArgumentValue = noteArgument.getValue();
+    assertThat(noteArgumentValue.getContent(), Matchers.is(payloadContent));
+    Instant noteTimestamp = ZonedDateTime.parse(payloadTimestamp, DATE_TIME_FORMATTER).toInstant();
+    assertThat(noteArgumentValue.getTimestamp(), Matchers.is(noteTimestamp));
+    assertThat(noteArgumentValue.getLongestPalindromeSize(), Matchers.is(6));
+    verifyNoMoreInteractions(noteRepository);
+
+    ArgumentCaptor<NoteDtoJS> dtoJSArgument = ArgumentCaptor.forClass(NoteDtoJS.class);
+    verify(template, times(1))
+        .convertAndSend(anyString(), dtoJSArgument.capture());
+
+    NoteDtoJS dtoJSArgumentValue = dtoJSArgument.getValue();
+    assertThat(dtoJSArgumentValue.getContent(), Matchers.is(payloadContent));
+    assertThat(dtoJSArgumentValue.getTimestamp(), Matchers.is(noteTimestamp.toEpochMilli()));
+    assertThat(dtoJSArgumentValue.getLongest_palindrome_size(), Matchers.is(6));
+    verifyNoMoreInteractions(template);
+  }
+
+  @Test
+  public void saveNoteTimestampNotAllowed() throws Exception {
+    for (int i = 0; i < 3; i++) {
+      switch (i) {
+        case 0: noteDtoPayload.setTimestamp("2018-5-09 00:12:12+0100");
+          break;
+        case 1: noteDtoPayload.setTimestamp("2018-05-09 00:1:12+0100");
+          break;
+        case 2: noteDtoPayload.setTimestamp("2018-5-09 00:12:12 0100");
+      }
+      mockMvc.perform(post("/api/save-note")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(TestService.convertToJson(noteDtoPayload))
+      )
+          .andDo(print())
+          .andExpect(status().isBadRequest());
+    }
+  }
+
+  @Test
+  public void newNoteWithoutDto() throws Exception {
+    mockMvc.perform(post("/api/save-note"))
+        .andDo(print())
+        .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void newNoteEmptyDto() throws Exception {
+    noteDtoPayload.setContent("");
+    noteDtoPayload.setTimestamp("");
+    mockMvc.perform(post("/api/save-note")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(TestService.convertToJson(noteDtoPayload))
+    )
+        .andDo(print())
+        .andExpect(jsonPath("$.status", is("Error creating note")))
+        .andExpect(jsonPath("$.message[0]", containsString("Empty property:")))
+        .andExpect(jsonPath("$.message[1]", containsString("Empty property:")))
+        .andExpect(status().isBadRequest());
   }
 
 }

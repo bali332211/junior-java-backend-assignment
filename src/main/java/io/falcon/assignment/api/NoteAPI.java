@@ -37,13 +37,13 @@ public class NoteAPI {
 
   @GetMapping("/api/all-notes")
   public ResponseEntity<List<NoteDtoDisplay>> allNotes() {
-    List<Note> notes = noteRepository.getAll();
+    List<Note> allNotes = noteRepository.getAll();
 
-    if(notes == null) {
+    if (allNotes == null) {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    List<NoteDtoDisplay> noteDtoDisplays = notes.stream()
+    List<NoteDtoDisplay> noteDtoDisplays = allNotes.stream()
         .map(NoteAPI::getDtosFromEntities)
         .collect(Collectors.toList());
 
@@ -62,6 +62,9 @@ public class NoteAPI {
 
   @PostMapping("/api/save-note")
   public ResponseEntity<NoteDtoPayload> saveNote(@Valid @RequestBody NoteDtoPayload noteDtoPayload) {
+    if (!isTimestampAllowed(noteDtoPayload.getTimestamp())) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 
     Note note = getNoteFromDto(noteDtoPayload);
     noteRepository.save(note);
@@ -85,5 +88,9 @@ public class NoteAPI {
     noteDtoJS.setTimestamp(note.getTimestamp().toEpochMilli());
     noteDtoJS.setLongest_palindrome_size(note.getLongestPalindromeSize());
     return noteDtoJS;
+  }
+
+  private boolean isTimestampAllowed(String timestamp) {
+    return timestamp.matches("(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}[+,-]\\d{4})");
   }
 }
