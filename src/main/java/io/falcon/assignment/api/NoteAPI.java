@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,6 +52,23 @@ public class NoteAPI {
     noteDtoDisplay.setTimestamp(DATE_TIME_FORMATTER.format(zonedDateTime));
     noteDtoDisplay.setLongest_palindrome_size(note.getLongestPalindromeSize());
     return noteDtoDisplay;
+  }
+
+  @PostMapping("/api/save-note")
+  public ResponseEntity<NoteDtoPayload> saveNote(@Valid @RequestBody NoteDtoPayload noteDtoPayload) {
+
+    Note note = getNoteFromDto(noteDtoPayload);
+    noteRepository.save(note);
+
+    return new ResponseEntity<>(noteDtoPayload, HttpStatus.OK);
+  }
+
+  private Note getNoteFromDto(NoteDtoPayload noteDtoPayload) {
+    Note note = new Note();
+    note.setContent(noteDtoPayload.getContent());
+    note.setTimestamp(ZonedDateTime.parse(noteDtoPayload.getTimestamp(), DATE_TIME_FORMATTER).toInstant());
+    note.setLongestPalindromeSize(palindromeFinder.getHighestPalindromeSize(noteDtoPayload.getContent()));
+    return note;
   }
 
 }
