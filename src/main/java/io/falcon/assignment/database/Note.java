@@ -4,9 +4,18 @@ import java.time.Instant;
 
 public class Note {
 
+  private long id;
   private String content;
   private Instant timestamp;
   private int longestPalindromeSize;
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
 
   public String getContent() {
     return content;

@@ -1,6 +1,7 @@
 package io.falcon.assignment.api;
 
 import io.falcon.assignment.database.Note;
+import io.falcon.assignment.database.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
