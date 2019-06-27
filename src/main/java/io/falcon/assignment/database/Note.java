@@ -9,6 +9,15 @@ public class Note {
   private Instant timestamp;
   private int longestPalindromeSize;
 
+  public Note() {
+  }
+
+  public Note(String content, Instant timestamp, int longestPalindromeSize) {
+    this.content = content;
+    this.timestamp = timestamp;
+    this.longestPalindromeSize = longestPalindromeSize;
+  }
+
   public long getId() {
     return id;
   }
