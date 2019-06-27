@@ -2,6 +2,7 @@ package io.falcon.assignment.api;
 
 import io.falcon.assignment.database.Note;
 import io.falcon.assignment.database.NoteRepository;
+import io.falcon.assignment.palindrome.PalindromeFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,12 @@ public class NoteAPI {
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssZ");
 
   private NoteRepository noteRepository;
+  private PalindromeFinder palindromeFinder;
 
   @Autowired
-  public NoteAPI(NoteRepository noteRepository) {
+  public NoteAPI(NoteRepository noteRepository, PalindromeFinder palindromeFinder) {
     this.noteRepository = noteRepository;
+    this.palindromeFinder = palindromeFinder;
   }
 
   @GetMapping("/api/all-notes")
