@@ -7,7 +7,7 @@ public class PalindromeFinderImpl implements PalindromeFinder {
 
   @Override
   public int getHighestPalindromeSize(String content) {
-    String contentTrimmed = trimToAlphaetical(content);
+    String contentTrimmed = trimToAlphabetical(content);
 
     int highestPalindromeSize = 0;
     for (int startIndex = 0; startIndex < content.length(); startIndex++) {
@@ -18,7 +18,30 @@ public class PalindromeFinderImpl implements PalindromeFinder {
     return highestPalindromeSize;
   }
 
-  private String trimToAlphaetical(String content) {
+  private int tryWithAllSubstringsFrom(String content, int startIndex) {
+    int highestPalindromeSize = 0;
+    for (int i = startIndex; i < content.length(); i++) {
+      int stringSliceLength = i + 1 - startIndex;
+
+      if (isStringSlicePalindrome(content, startIndex, i)) {
+        highestPalindromeSize = Math.max(highestPalindromeSize, stringSliceLength);
+      }
+    }
+    return highestPalindromeSize;
+  }
+
+  private boolean isStringSlicePalindrome(String content, int startIndex, int endIndex) {
+    int stringSliceLength = endIndex + 1 - startIndex;
+
+    for (int i = 0; i < stringSliceLength / 2; i++) {
+      if(content.charAt(startIndex + i) != content.charAt(endIndex - i)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private String trimToAlphabetical(String content) {
     StringBuilder stringBuilder = new StringBuilder();
 
     for (int i = 0; i < content.length(); i++) {
