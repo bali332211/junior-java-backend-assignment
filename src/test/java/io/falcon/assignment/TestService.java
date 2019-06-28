@@ -12,8 +12,4 @@ public class TestService {
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     return mapper.writeValueAsBytes(object);
   }
-//  docker ps -a
-//  docker rm 687e9f0642ff 060fd612d398
-//  U
-//  ./mvnw clean package && docker-compose build && docker-compose up
 }

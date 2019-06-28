@@ -11,19 +11,18 @@ README
 ```
 
 ### Endpoints:
-/
+#### /
 > Main page for web socket connection
-/api/save-note
-> Accepts note JSON payload
 
-	Payload structure:
-    ```json
+#### /api/save-note
+> Accepts note JSON payload
+   ```json
     {
       "content": "abrakadabra",
       "timestamp": "2018-10-09 00:12:12+0100"
     }
-    ```
-/api/all-notes
+   ```
+#### /api/all-notes
 > Displays all notes currently in database in JSON
 
 Environment variables in _.env_ file
@@ -39,6 +38,8 @@ Environment variables in _.env_ file
 - API, validation, repository, palindrome finder tests with 100% pitest mutation and line coverage
 ```
 mvnw org.pitest:pitest-maven:mutationCoverage
+
+Html generated in /target/pitest-reports/timestamp
 ```
 - Main page timestamps calculated by frontend JS
 - Responsive css for mobile

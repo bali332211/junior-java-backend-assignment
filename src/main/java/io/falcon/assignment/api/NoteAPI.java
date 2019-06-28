@@ -43,12 +43,12 @@ public class NoteAPI {
     }
 
     List<NoteDtoDisplay> noteDtoDisplays = allNotes.stream()
-        .map(NoteAPI::getDtosFromEntities)
+        .map(NoteAPI::getDtosFromNotes)
         .collect(Collectors.toList());
     return new ResponseEntity<>(noteDtoDisplays, HttpStatus.OK);
   }
 
-  private static NoteDtoDisplay getDtosFromEntities(Note note) {
+  private static NoteDtoDisplay getDtosFromNotes(Note note) {
     NoteDtoDisplay noteDtoDisplay = new NoteDtoDisplay();
 
     noteDtoDisplay.setContent(note.getContent());
