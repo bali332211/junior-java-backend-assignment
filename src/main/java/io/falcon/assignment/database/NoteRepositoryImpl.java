@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * Repository for operations on the connected database.
+ */
 @Repository
 public class NoteRepositoryImpl implements NoteRepository{
 
@@ -22,11 +25,25 @@ public class NoteRepositoryImpl implements NoteRepository{
     this.template = template;
   }
 
+
+  /**
+   * Returns all <code>Note</code> instances.
+   *
+   * @return all Notes
+   */
   @Override
   public List<Note> getAll() {
     return template.query("select * from notes", new NoteRowMapper());
   }
 
+
+  /**
+   * Saves a given <code>Note</code>. Use the returned instance for further operations as the save operation might have changed the
+   * entity instance completely.
+   *
+   * @param note must not be {@literal null}.
+   * @return the saved entity will never be {@literal null}.
+   */
   @Override
   @Transactional
   public void save(Note note) {

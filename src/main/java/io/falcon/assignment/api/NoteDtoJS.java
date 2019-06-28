@@ -3,6 +3,7 @@ package io.falcon.assignment.api;
 public class NoteDtoJS {
 
   private String content;
+  /** Timestamp for Date constructor in JS */
   private long timestamp;
   private int longest_palindrome_size;
 

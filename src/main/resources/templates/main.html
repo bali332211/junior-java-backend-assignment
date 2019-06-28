@@ -7,6 +7,7 @@
 <body>
 <noscript><h2>Please enable Javascript and reload this page</h2></noscript>
 <div class="container">
+    <!-----------------------Connect and disconnect buttons-------------------------------->
     <form>
         <div class="row">
             <div class="col-label">
@@ -15,14 +16,13 @@
             <div class="col-button-before"></div>
             <button id="connect" type="submit">Connect</button>
             <button id="disconnect" class="hidden" type="submit" disabled="disabled">Disconnect</button>
-
         </div>
     </form>
-
+    <!-----------------------Connection status---------------------------------------------->
     <div class="col-label">
         <h3 id="connection"></h3>
     </div>
-
+    <!-----------------------Table for new notes---------------------------------------------->
     <table id="notesTable" class="hidden">
         <caption>Notes</caption>
         <thead>

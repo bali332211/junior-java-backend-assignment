@@ -13,6 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class customizes the returned JSON messages for @Valid exceptions.
+ */
 @RestControllerAdvice
 public class ValidRestControllerAdvice extends ResponseEntityExceptionHandler {
 
