@@ -1,7 +1,6 @@
 --
 -- Database schema
 --
-CREATE TABLE test (
-    id bigint,
-    text character varying(100)
-);
+CREATE USER postgres;
+CREATE DATABASE notesdb;
+GRANT ALL PRIVILEGES ON DATABASE notesdb TO postgres;

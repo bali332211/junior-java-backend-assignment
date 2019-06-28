@@ -3,15 +3,24 @@ services:
   junior-java-backend-assignment:
     build:
       context: '.'
+    environment:
+      - POSTGRES_DB=notesdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_SCHEMA=notesdb
+      - POSTGRES_HOSTNAME=database
+      - POSTGRES_PORT=5432
     ports:
       - '8080:8080/tcp'
+    depends_on:
+      - database
   database:
     image: 'postgres:9.6'
     environment:
-      POSTGRES_DB: "${POSTGRES_DB}"
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      POSTGRES_SCHEMA: "${POSTGRES_SCHEMA}"
-      POSTGRES_HOSTNAME: "${POSTGRES_HOSTNAME}"
+      - POSTGRES_DB=notesdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - './database:/docker-entrypoint-initdb.d'
     ports:
       - '5432:5432/tcp'
