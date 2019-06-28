@@ -138,14 +138,14 @@ public class NoteAPITest {
 
   @Test
   public void saveNoteTimestampNotAllowed() throws Exception {
-    for (int i = 0; i < 3; i++) {
-      switch (i) {
-        case 0: noteDtoPayload.setTimestamp("2018-5-09 00:12:12+0100");
-          break;
-        case 1: noteDtoPayload.setTimestamp("2018-05-09 00:1:12+0100");
-          break;
-        case 2: noteDtoPayload.setTimestamp("2018-5-09 00:12:12 0100");
-      }
+    List<String> timestampsNotAllowed = Arrays.asList(
+        "2018-5-09 00:12:12+0100",
+        "2018-05-09 00:1:12+0100",
+        "2018-5-09 00:12:12 0100");
+
+    for (String timestamp : timestampsNotAllowed) {
+      noteDtoPayload.setTimestamp(timestamp);
+
       mockMvc.perform(post("/api/save-note")
           .contentType(MediaType.APPLICATION_JSON)
           .content(TestService.convertToJson(noteDtoPayload))
