@@ -38,11 +38,10 @@ public class NoteRepositoryImpl implements NoteRepository{
 
 
   /**
-   * Saves a given <code>Note</code>. Use the returned instance for further operations as the save operation might have changed the
-   * entity instance completely.
+   * Saves a given <code>Note</code>. The save operation updates an existing
+   * entity instance.
    *
    * @param note must not be {@literal null}.
-   * @return the saved entity will never be {@literal null}.
    */
   @Override
   @Transactional

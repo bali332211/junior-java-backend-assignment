@@ -4,12 +4,12 @@ services:
     build:
       context: '.'
     environment:
-      - POSTGRES_DB=notesdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_SCHEMA=notesdb
-      - POSTGRES_HOSTNAME=database
-      - POSTGRES_PORT=5432
+      - POSTGRES_HOSTNAME=${POSTGRES_HOSTNAME}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_SCHEMA=${POSTGRES_SCHEMA}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - '8080:8080/tcp'
     depends_on:
@@ -17,10 +17,10 @@ services:
   database:
     image: 'postgres:9.6'
     environment:
-      - POSTGRES_DB=notesdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - './database:/docker-entrypoint-initdb.d'
     ports:
-      - '5432:5432/tcp'
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}/tcp'

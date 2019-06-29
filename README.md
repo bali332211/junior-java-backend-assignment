@@ -5,7 +5,7 @@ README
 
 # Junior Backend Assignment Note Management Application
 
-## To run the application:
+## To run the application in Docker:
 ```
 ./mvnw clean package && docker-compose build && docker-compose up
 ```
@@ -38,8 +38,7 @@ Environment variables in _.env_ file
 - API, validation, repository, palindrome finder tests with 100% pitest mutation and line coverage
 ```
 mvnw org.pitest:pitest-maven:mutationCoverage
-
-Html generated in /target/pitest-reports/timestamp
 ```
+Html generated in /target/pitest-reports/timestamp
 - Main page timestamps calculated by frontend JS
 - Responsive css for mobile
