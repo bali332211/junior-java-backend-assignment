@@ -7,7 +7,8 @@ import java.util.List;
  */
 public interface NoteRepository {
 
-  List<Note> getAll();
-  void save(Note note);
+    List<Note> getAll();
+
+    void save(Note note);
 
 }

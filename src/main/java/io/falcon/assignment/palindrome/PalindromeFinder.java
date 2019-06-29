@@ -5,5 +5,5 @@ package io.falcon.assignment.palindrome;
  */
 public interface PalindromeFinder {
 
-  int getHighestPalindromeSize(String content);
+    int getHighestPalindromeSize(String content);
 }

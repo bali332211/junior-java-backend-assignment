@@ -7,8 +7,10 @@ README
 
 ## To run the application in Docker:
 ```
-./mvnw clean package && docker-compose build && docker-compose up
+docker-compose up
 ```
+
+Environment variables in _.env_ file
 
 ### Endpoints:
 > #### /
@@ -35,6 +37,7 @@ Environment variables in _.env_ file
 - PostgreSQL
 - Flyway
 - Thymeleaf html fragment
+- H2 database for testing
 - API, validation, repository, palindrome finder tests with 100% pitest mutation and line coverage
 ```
 mvnw org.pitest:pitest-maven:mutationCoverage

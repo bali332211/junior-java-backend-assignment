@@ -4,7 +4,7 @@ services:
     build:
       context: '.'
     environment:
-      - POSTGRES_HOSTNAME=${POSTGRES_HOSTNAME}
+      - POSTGRES_HOSTNAME=${DOCKER_DB}
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_SCHEMA=${POSTGRES_SCHEMA}
@@ -13,7 +13,7 @@ services:
     ports:
       - '8080:8080/tcp'
     depends_on:
-      - database
+      - ${DOCKER_DB}
   database:
     image: 'postgres:9.6'
     environment:

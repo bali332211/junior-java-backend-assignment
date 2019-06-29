@@ -26,43 +26,43 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
     @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:/db/migration/data.sql")})
 public class NoteRepositoryTest {
 
-  @Autowired
-  private NoteRepository noteRepository;
+    @Autowired
+    private NoteRepository noteRepository;
 
-  @Autowired
-  private NamedParameterJdbcTemplate template;
+    @Autowired
+    private NamedParameterJdbcTemplate template;
 
-  private Note note;
-  private Instant now;
+    private Note note;
+    private Instant now;
 
-  @Before
-  public void setup() {
-    note = new Note();
-    note.setContent("contentNotellkkll");
-    now = Instant.now();
-    note.setTimestamp(now);
-    note.setLongestPalindromeSize(6);
-  }
+    @Before
+    public void setup() {
+        note = new Note();
+        note.setContent("contentNotellkkll");
+        now = Instant.now();
+        note.setTimestamp(now);
+        note.setLongestPalindromeSize(6);
+    }
 
-  @Test
-  public void save() {
-    assertThat(noteRepository.getAll().size(), is(2));
-    noteRepository.save(note);
+    @Test
+    public void save() {
+        assertThat(noteRepository.getAll().size(), is(2));
+        noteRepository.save(note);
 
-    List<Note> allNotesNew = noteRepository.getAll();
-    assertThat(allNotesNew.size(), is(3));
+        List<Note> allNotesNew = noteRepository.getAll();
+        assertThat(allNotesNew.size(), is(3));
 
-    Note newNote = allNotesNew.get(allNotesNew.size() - 1);
-    assertThat(newNote.getContent(), is("contentNotellkkll"));
-    assertThat(newNote.getTimestamp(), is(now));
-    assertThat(newNote.getLongestPalindromeSize(), is(6));
-  }
+        Note newNote = allNotesNew.get(allNotesNew.size() - 1);
+        assertThat(newNote.getContent(), is("contentNotellkkll"));
+        assertThat(newNote.getTimestamp(), is(now));
+        assertThat(newNote.getLongestPalindromeSize(), is(6));
+    }
 
-  @Test
-  public void getAll() {
-    List<Note> allNotes = noteRepository.getAll();
-    assertFalse(allNotes.isEmpty());
-    assertThat(allNotes.size(), is(2));
-    assertThat(allNotes.get(0).getContent(), is("abrakadabra"));
-  }
+    @Test
+    public void getAll() {
+        List<Note> allNotes = noteRepository.getAll();
+        assertFalse(allNotes.isEmpty());
+        assertThat(allNotes.size(), is(2));
+        assertThat(allNotes.get(0).getContent(), is("abrakadabra"));
+    }
 }

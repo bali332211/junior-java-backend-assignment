@@ -16,46 +16,46 @@ import java.util.List;
  * Repository for operations on the connected database.
  */
 @Repository
-public class NoteRepositoryImpl implements NoteRepository{
+public class NoteRepositoryImpl implements NoteRepository {
 
-  private NamedParameterJdbcTemplate template;
+    private NamedParameterJdbcTemplate template;
 
-  @Autowired
-  public NoteRepositoryImpl(NamedParameterJdbcTemplate template) {
-    this.template = template;
-  }
-
-
-  /**
-   * Returns all <code>Note</code> instances.
-   *
-   * @return all Notes
-   */
-  @Override
-  public List<Note> getAll() {
-    return template.query("select * from notes", new NoteRowMapper());
-  }
+    @Autowired
+    public NoteRepositoryImpl(NamedParameterJdbcTemplate template) {
+        this.template = template;
+    }
 
 
-  /**
-   * Saves a given <code>Note</code>. The save operation updates an existing
-   * entity instance.
-   *
-   * @param note must not be {@literal null}.
-   */
-  @Override
-  @Transactional
-  public void save(Note note) {
-    final String sql =
-        "insert into notes" +
-            "(content, timestamp , longest_palindrome_size) values" +
-            "(:content,:timestamp,:longestPalindromeSize)";
-    KeyHolder holder = new GeneratedKeyHolder();
+    /**
+     * Returns all <code>Note</code> instances.
+     *
+     * @return all Notes
+     */
+    @Override
+    public List<Note> getAll() {
+        return template.query("select * from notes", new NoteRowMapper());
+    }
 
-    SqlParameterSource param = new MapSqlParameterSource()
-        .addValue("content", note.getContent())
-        .addValue("timestamp", Timestamp.from(note.getTimestamp()))
-        .addValue("longestPalindromeSize", note.getLongestPalindromeSize());
-    template.update(sql, param, holder);
-  }
+
+    /**
+     * Saves a given <code>Note</code>. The save operation updates an existing
+     * entity instance.
+     *
+     * @param note must not be {@literal null}.
+     */
+    @Override
+    @Transactional
+    public void save(Note note) {
+        final String sql =
+            "insert into notes" +
+                "(content, timestamp , longest_palindrome_size) values" +
+                "(:content,:timestamp,:longestPalindromeSize)";
+        KeyHolder holder = new GeneratedKeyHolder();
+
+        SqlParameterSource param = new MapSqlParameterSource()
+            .addValue("content", note.getContent())
+            .addValue("timestamp", Timestamp.from(note.getTimestamp()))
+            .addValue("longestPalindromeSize", note.getLongestPalindromeSize());
+        template.update(sql, param, holder);
+    }
 }

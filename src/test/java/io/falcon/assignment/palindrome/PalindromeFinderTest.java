@@ -15,14 +15,14 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 public class PalindromeFinderTest {
 
-  @Autowired
-  private PalindromeFinder palindromeFinder;
+    @Autowired
+    private PalindromeFinder palindromeFinder;
 
-  @Test
-  public void addPalindromeSize() {
-    assertThat(palindromeFinder.getHighestPalindromeSize("contentNotellkkll"), is(6));
-    assertThat(palindromeFinder.getHighestPalindromeSize("vv/%/vv"), is(4));
-    assertThat(palindromeFinder.getHighestPalindromeSize(".$@$."), is(0));
-    assertThat(palindromeFinder.getHighestPalindromeSize("c"), is(1));
-  }
+    @Test
+    public void addPalindromeSize() {
+        assertThat(palindromeFinder.getHighestPalindromeSize("contentNotellkkll"), is(6));
+        assertThat(palindromeFinder.getHighestPalindromeSize("vv/%/vv"), is(4));
+        assertThat(palindromeFinder.getHighestPalindromeSize(".$@$."), is(0));
+        assertThat(palindromeFinder.getHighestPalindromeSize("c"), is(1));
+    }
 }

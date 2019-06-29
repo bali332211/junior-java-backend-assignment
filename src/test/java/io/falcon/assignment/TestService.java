@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class TestService {
 
-  public static byte[] convertToJson(Object object) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    return mapper.writeValueAsBytes(object);
-  }
+    public static byte[] convertToJson(Object object) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return mapper.writeValueAsBytes(object);
+    }
 }
