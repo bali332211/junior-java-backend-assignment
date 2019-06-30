@@ -6,26 +6,19 @@ import org.springframework.stereotype.Component;
 public class PalindromeFinderImpl implements PalindromeFinder {
 
     /**
-     * Retrieves the longest palindrome's length in the given String.
-     *
-     * <p>
-     * Only alphabetical characters are considered, any other character
-     * is disregarded during calculation.
-     *
-     * @param content the String to be searched.
-     * @return the longest palindrome's length within the String.
+     * {@inheritDoc}
      */
     @Override
-    public int getHighestPalindromeSize(String content) {
+    public int getLongestPalindromeSize(String content) {
         String contentTrimmed = trimToAlphabetical(content);
 
-        int highestPalindromeSize = 0;
+        int longestPalindromeSize = 0;
         for (int startIndex = 0; startIndex < content.length(); startIndex++) {
 
-            int palindromeSize = tryWithAllSubstringsFrom(contentTrimmed, startIndex);
-            highestPalindromeSize = Math.max(highestPalindromeSize, palindromeSize);
+            int palindromeSize = getLongestPalindromeSizeFromAllSubstrings(contentTrimmed, startIndex);
+            longestPalindromeSize = Math.max(longestPalindromeSize, palindromeSize);
         }
-        return highestPalindromeSize;
+        return longestPalindromeSize;
     }
 
     private String trimToAlphabetical(String content) {
@@ -40,16 +33,16 @@ public class PalindromeFinderImpl implements PalindromeFinder {
         return stringBuilder.toString().toLowerCase();
     }
 
-    private int tryWithAllSubstringsFrom(String content, int startIndex) {
-        int highestPalindromeSize = 0;
+    private int getLongestPalindromeSizeFromAllSubstrings(String content, int startIndex) {
+        int longestPalindromeSize = 0;
         for (int i = startIndex; i < content.length(); i++) {
             int stringSliceLength = i + 1 - startIndex;
 
             if (isStringSlicePalindrome(content, startIndex, i)) {
-                highestPalindromeSize = Math.max(highestPalindromeSize, stringSliceLength);
+                longestPalindromeSize = Math.max(longestPalindromeSize, stringSliceLength);
             }
         }
-        return highestPalindromeSize;
+        return longestPalindromeSize;
     }
 
     private boolean isStringSlicePalindrome(String content, int startIndex, int endIndex) {

@@ -75,7 +75,7 @@ public class NoteAPI {
         Note note = new Note();
         note.setContent(noteDtoPayload.getContent());
         note.setTimestamp(ZonedDateTime.parse(noteDtoPayload.getTimestamp(), DATE_TIME_FORMATTER).toInstant());
-        note.setLongestPalindromeSize(palindromeFinder.getHighestPalindromeSize(noteDtoPayload.getContent()));
+        note.setLongestPalindromeSize(palindromeFinder.getLongestPalindromeSize(noteDtoPayload.getContent()));
         return note;
     }
 

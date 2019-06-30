@@ -103,7 +103,7 @@ public class NoteAPITest {
 
     @Test
     public void saveNoteOk() throws Exception {
-        when(palindromeFinder.getHighestPalindromeSize(notNull())).thenReturn(6);
+        when(palindromeFinder.getLongestPalindromeSize(notNull())).thenReturn(6);
 
         mockMvc.perform(post("/api/save-note")
             .contentType(MediaType.APPLICATION_JSON)

@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
-/**
- * Repository for operations on the connected database.
- */
 @Repository
 public class NoteRepositoryImpl implements NoteRepository {
 
@@ -25,37 +22,30 @@ public class NoteRepositoryImpl implements NoteRepository {
         this.template = template;
     }
 
-
     /**
-     * Returns all <code>Note</code> instances.
-     *
-     * @return all Notes
+     * {@inheritDoc}
      */
     @Override
     public List<Note> getAll() {
         return template.query("select * from notes", new NoteRowMapper());
     }
 
-
     /**
-     * Saves a given <code>Note</code>. The save operation updates an existing
-     * entity instance.
-     *
-     * @param note must not be {@literal null}.
+     * {@inheritDoc}
      */
     @Override
     @Transactional
     public void save(Note note) {
         final String sql =
-            "insert into notes" +
-                "(content, timestamp , longest_palindrome_size) values" +
-                "(:content,:timestamp,:longestPalindromeSize)";
+                "insert into notes" +
+                        "(content, timestamp , longest_palindrome_size) values" +
+                        "(:content,:timestamp,:longestPalindromeSize)";
         KeyHolder holder = new GeneratedKeyHolder();
 
         SqlParameterSource param = new MapSqlParameterSource()
-            .addValue("content", note.getContent())
-            .addValue("timestamp", Timestamp.from(note.getTimestamp()))
-            .addValue("longestPalindromeSize", note.getLongestPalindromeSize());
+                .addValue("content", note.getContent())
+                .addValue("timestamp", Timestamp.from(note.getTimestamp()))
+                .addValue("longestPalindromeSize", note.getLongestPalindromeSize());
         template.update(sql, param, holder);
     }
 }

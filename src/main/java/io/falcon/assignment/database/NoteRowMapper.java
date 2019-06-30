@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * This class maps each row to a result <code>Note</code> object from its table.
+ * This class maps each row of notes table to a result {@link Note} object.
  */
 public class NoteRowMapper implements RowMapper<Note> {
 

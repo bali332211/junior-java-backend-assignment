@@ -1,4 +1,3 @@
-/* -------------------------- nav ------------------------ */
 body {
     margin-top: 40px;
     margin-left: 0;
@@ -22,39 +21,6 @@ height: 110%;
 -ms-filter: blur(10px);
 filter: blur(10px);
 }
-
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.topnav a {
-    float: left;
-    display: block;
-    color: ghostwhite;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.active {
-    background-color: #4CAF50;
-    color: ghostwhite;
-}
-
-.topnav .icon {
-    display: none;
-}
-
 
 /* -------------------------- form ------------------------ */
 
@@ -113,18 +79,6 @@ button[type=submit]:hover {
     display: none;
 }
 
-#delete {
-    background-color: ghostwhite;
-    border-color: aliceblue;
-    color: #333333;
-}
-
-#delete:hover {
-    background-color: red;
-    border-color: #ff2415;
-    color: ghostwhite;
-}
-
 #connecting {
     margin-left: auto;
     margin-right: auto;
@@ -181,14 +135,6 @@ h2 {
 body {
     font-family: "Open Sans", sans-serif;
     line-height: 1.25;
-}
-
-.nav-arrow {
-    color: ghostwhite;
-}
-
-.nav-arrow:active {
-    color: goldenrod;
 }
 
 .text-muted {
@@ -250,35 +196,4 @@ td[data-label]:hover{
 
 .page {
     color: ghostwhite;
-}
-
-/* -------------------------- alert ------------------------ */
-
-.alert-done {
-    padding: 20px;
-    background-color: green;
-    color: white;
-    width: 50%;
-}
-
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
-}
-
-.alert-error {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-    width: 50%;
 }

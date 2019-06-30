@@ -1,9 +1,16 @@
 package io.falcon.assignment.palindrome;
 
-/**
- * Interface for operations based on palindromes.
- */
 public interface PalindromeFinder {
 
-    int getHighestPalindromeSize(String content);
+    /**
+     * Retrieves the longest palindrome's length in the given String.
+     *
+     * <p>
+     * Only alphabetical characters are considered, any other character
+     * is disregarded during calculation.
+     *
+     * @param content the String to be searched.
+     * @return the longest palindrome's length within the String.
+     */
+    int getLongestPalindromeSize(String content);
 }

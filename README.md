@@ -3,14 +3,14 @@ README
 
 [Requirements](Requirements.md)
 
-# Junior Backend Assignment Note Management Application
+# Note Management Application
 
 ## To run the application in Docker:
 ```
 docker-compose up
 ```
 
-Environment variables in _.env_ file
+Docker-compose environment variables in _.env_ file. Hostname, role, database names are given without these variables in sql file for container in /database and in docker-compose.yml. Application.properties has POSTGRES_HOSTNAME to set as well.
 
 ### Endpoints:
 > #### /
@@ -27,13 +27,11 @@ Accepts note JSON payload
 > #### /api/all-notes
 Displays all notes currently in database in JSON
 
-Environment variables in _.env_ file
-
 ## Technologies and traits of project
 - Java SpringBoot
 - Payload validation for /api/save-note using @Valid
   - Empty fields
-  - Timestamp format 2018-10-09 00:12:12+0100
+  - Timestamp format
 - PostgreSQL
 - Flyway
 - Thymeleaf html fragment

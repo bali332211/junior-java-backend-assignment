@@ -10,6 +10,9 @@ $(function () {
 });
 
 function connect() {
+    if (stompClient !== null) {
+        stompClient.disconnect();
+    }
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
@@ -71,5 +74,10 @@ function tableColumn(label, text) {
 
 function formatDate(timestampEpoch) {
     var myDate = new Date(timestampEpoch);
-    return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2) + '-' + ('0' + myDate.getDate()).slice(-2) + ' ' + ('0' + (myDate.getHours())).slice(-2) +  ':'+('0' + (myDate.getMinutes())).slice(-2) + ':' + myDate.getSeconds() + '+0000';
+    return myDate.getFullYear() + '-' +
+    ('0' + (myDate.getMonth()+1)).slice(-2) + '-' +
+    ('0' + myDate.getDate()).slice(-2) + ' ' +
+    ('0' + (myDate.getHours())).slice(-2) +  ':' +
+    ('0' + (myDate.getMinutes())).slice(-2) + ':' +
+    myDate.getSeconds() + '+0000';
 }
